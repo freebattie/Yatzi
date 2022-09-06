@@ -1,8 +1,10 @@
 public class DiceHand {
-    public DiceHand(Dice[] dice, DiceChoice chance) {
+
+    public DiceHand(int[] values) {
+
     }
 
-    public short getValue() {
+    public short getValue(DiceChoice chance) {
         return 15;
     }
 }
