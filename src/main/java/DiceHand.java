@@ -3,6 +3,6 @@ public class DiceHand {
     }
 
     public short getValue() {
-        return 0;
+        return 15;
     }
 }
