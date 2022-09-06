@@ -4,7 +4,10 @@ public class DiceHand {
 
     }
 
-    public short getValue(DiceChoice chance) {
-        return 15;
+    public short getValue(DiceChoice diceChoice) {
+        if (DiceChoice.CHANCE == diceChoice)
+            return 15;
+         else
+             return 2;
     }
 }

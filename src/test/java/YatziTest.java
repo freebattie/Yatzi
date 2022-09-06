@@ -12,18 +12,14 @@ public class YatziTest {
         assertEquals(15,diceHand.getValue(DiceChoice.CHANCE) );
     }
 
+    @Test
+    public void OnesDiceTest(){
+        var diceHand = new DiceHand(new int[] {
+                1,1,2,4,5
+        });
 
-/*    @Test
-    public void DicePairTest(){
-        var diceHand = new DiceHand(new Dice[] {
-                new Dice(6),
-                new Dice(2),
-                new Dice(1),
-                new Dice(1),
-                new Dice(5)
-        }, DiceChoice.ONES);
+        assertEquals(2,diceHand.getValue(DiceChoice.ONES) );
+    }
 
-        assertEquals(diceHand.getValue(), 2);
-    }*/
 }
 
