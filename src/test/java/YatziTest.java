@@ -13,7 +13,7 @@ public class YatziTest {
                 new Dice(1)
         }, DiceChoice.CHANCE);
 
-        assertEquals(diceHand.getValue(), 15);
+        assertEquals(15,diceHand.getValue() );
     }
 
 
