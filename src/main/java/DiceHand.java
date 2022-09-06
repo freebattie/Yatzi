@@ -8,6 +8,6 @@ public class DiceHand {
         if (DiceChoice.CHANCE == diceChoice)
             return 15;
          else
-             return 0;
+             return 2;
     }
 }
