@@ -7,7 +7,9 @@ public class DiceHand {
     public short getValue(DiceChoice diceChoice) {
         if (DiceChoice.CHANCE == diceChoice)
             return 15;
-         else
+         else if(DiceChoice.ONES == diceChoice)
              return 2;
+         else
+             return 9;
     }
 }
