@@ -36,6 +36,14 @@ public class YatziTest {
 
         assertEquals(15,diceHand.getValue(DiceChoice.THREES) );
     }
+    @Test
+    public void twoOfACind(){
+        var diceHand = new DiceHand(new int[] {
+                2,2,3,3,4
+        });
+
+        assertEquals(15,diceHand.getValue(DiceChoice.THREES) );
+    }
 
 
 
