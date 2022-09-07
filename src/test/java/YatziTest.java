@@ -24,10 +24,10 @@ public class YatziTest {
     @Test
     public void ThreeDiceTest(){
         var diceHand = new DiceHand(new int[]{
-                3,2,2,3,5,4
+                3,2,3,3,5,4
         });
 
-        assertEquals(6, diceHand.getValue(DiceChoice.THREEOFAKIND) );
+        assertEquals(9, diceHand.getValue(DiceChoice.THREEOFAKIND) );
     }
 
 }
