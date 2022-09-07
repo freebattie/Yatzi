@@ -28,10 +28,8 @@ jobs:
       uses: scacap/action-surefire-report@v1
       if: ${{ always() }}
     - name: 🚀 Coveralls Coverage Report Submission
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.COVERALL_REPO_TOKEN }}
-      if: ${{ always() }}
+      run: mvn coveralls:report --define repoToken=${{ secrets.COVERALL_REPO_TOKEN }}
+
 
 
 
