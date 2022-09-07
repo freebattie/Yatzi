@@ -61,11 +61,25 @@ public class YatziTest {
     @Test
     public void bestTwoPairs(){
         var diceHand = new DiceHand(new int[] {
-                4,4,5,2,2
+                2,2,5,4,4
         });
 
 
         assertEquals(12,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOPAIR) );
+    }
+    @Test
+    public void checkForHouse(){
+        var diceHand = new DiceHand(new int[] {
+                2,2,4,4,4
+        });
+        assertEquals(16,diceHand.getMaxTotalForDiceChoice(DiceChoice.HOUSE) );
+    }
+    @Test
+    public void checkForYatzy(){
+        var diceHand = new DiceHand(new int[] {
+                5,5,5,5,5
+        });
+        assertEquals(50,diceHand.getMaxTotalForDiceChoice(DiceChoice.YATZY) );
     }
 
 }

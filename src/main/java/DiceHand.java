@@ -20,6 +20,29 @@ public class DiceHand {
         if (diceChoice == DiceChoice.FOREOFAKIND ){
             return getMaxScoreOfGivenFrequency(diceFrequency, 4);
         }
+        if (diceChoice == DiceChoice.YATZY ){
+            return getYatzyScore(diceFrequency, 5);
+        }
+        if (diceChoice == DiceChoice.TWOPAIR ){
+
+            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
+            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+
+            if (maxValue2  < 0 || maxValue <0)
+                return 0;
+            return maxValue + maxValue2;
+
+        }
+        if (diceChoice == DiceChoice.HOUSE ){
+
+            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
+            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+
+            if (maxValue2  < 0 || maxValue <0)
+                return 0;
+            return maxValue + maxValue2;
+
+        }
 
         if (diceChoice == DiceChoice.CHANCE){
             int maxvalue = 0;
@@ -60,18 +83,36 @@ public class DiceHand {
         return valueOfEachDie;
     }
 
-    private int getMaxScoreOfGivenFrequency(HashMap<Integer, Integer> valueOfEachDie, int frequency) {
+    private int getMaxScoreOfGivenFrequency(HashMap<Integer, Integer> diceFrequency, int frequency) {
 
         int maxValue = -1;
-        for (var key  : valueOfEachDie.keySet()){
+        int maxKey = 0;
+        for (var key  : diceFrequency.keySet()){
 
-            if (valueOfEachDie.get(key) >= frequency) {
+            if (diceFrequency.get(key) >= frequency) {
                 if (key * frequency > maxValue){
                     maxValue = key * frequency;
+                    maxKey = key;
                 }
 
             }
         }
+        diceFrequency.remove(maxKey);
         return maxValue;
+    }
+    private int getYatzyScore(HashMap<Integer, Integer> diceFrequency, int frequency) {
+
+        int maxValue = -1;
+
+        for (var key  : diceFrequency.keySet()){
+
+            if (diceFrequency.get(key) >= frequency) {
+
+                diceFrequency.remove(key);
+                return 50;
+            }
+        }
+
+        return 0;
     }
 }
