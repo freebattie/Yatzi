@@ -29,6 +29,7 @@ jobs:
       if: ${{ always() }}
     - name: 🚀 Coveralls Coverage Report Submission
       run: mvn coveralls:report --define repoToken=${{ secrets.COVERALL_REPO_TOKEN }}
+      uses: coverallsapp/github-action@main
       if: ${{ always() }}
 
 
