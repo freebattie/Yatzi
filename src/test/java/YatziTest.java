@@ -21,5 +21,14 @@ public class YatziTest {
         assertEquals(2,diceHand.getValue(DiceChoice.ONES) );
     }
 
+    @Test
+    public void ThreeDiceTest(){
+        var diceHand = new DiceHand(new int[]{
+                3,2,2,3,5,4
+        });
+
+        assertEquals(6, diceHand.getValue(DiceChoice.THREEOFAKIND) );
+    }
+
 }
 
