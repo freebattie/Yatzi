@@ -9,7 +9,7 @@ public class YatziTest {
                 1,2,3,4,5
         });
 
-        assertEquals(15,diceHand.getValue(DiceChoice.CHANCE) );
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.CHANCE) );
     }
     @Test
     public void ThreeOfAKindTest() {
@@ -23,7 +23,7 @@ public class YatziTest {
                 1,1,2,4,5
         });
 
-        assertEquals(2,diceHand.getValue(DiceChoice.ONES) );
+        assertEquals(2,diceHand.getMaxTotalForDiceChoice(DiceChoice.ONES) );
     }
     @Test
     public void TwoDiceTest(){
@@ -31,7 +31,7 @@ public class YatziTest {
                 1,2,2,4,5
         });
 
-        assertEquals(4,diceHand.getValue(DiceChoice.TWOS) );
+        assertEquals(4,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOS) );
     }
     @Test
     public void ThreesDiceTest(){
@@ -39,7 +39,7 @@ public class YatziTest {
                 3,3,3,3,3
         });
 
-        assertEquals(15,diceHand.getValue(DiceChoice.THREES) );
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREES) );
     }
     @Test
     public void bestPairScoreTest(){
@@ -47,7 +47,7 @@ public class YatziTest {
                 2,2,3,3,4
         });
 
-        assertEquals(6,diceHand.getValue(DiceChoice.ONEPAIR) );
+        assertEquals(6,diceHand.getMaxTotalForDiceChoice(DiceChoice.ONEPAIR) );
     }
     @Test
     public void bestThreeOfAKindScoreTest(){
@@ -56,7 +56,16 @@ public class YatziTest {
         });
 
 
-        assertEquals(9,diceHand.getValue(DiceChoice.THREEOFAKIND) );
+        assertEquals(9,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+    }
+    @Test
+    public void bestTwoPairs(){
+        var diceHand = new DiceHand(new int[] {
+                4,4,5,2,2
+        });
+
+
+        assertEquals(12,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOPAIR) );
     }
 
 }
