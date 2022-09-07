@@ -22,9 +22,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: 🤞Build with Maven
       run: mvn --batch-mode --update-snapshots test jacoco:report --fail-at-end
-    - name: Publish Test Report
+    - name: 👀Publish Test Report
       uses: scacap/action-surefire-report@v1
       if: ${{ always() }}
     - name: 🚀 Coveralls Coverage Report Submission
