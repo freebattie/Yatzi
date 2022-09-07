@@ -20,6 +20,23 @@ public class YatziTest {
 
         assertEquals(2,diceHand.getValue(DiceChoice.ONES) );
     }
+    @Test
+    public void TwoDiceTest(){
+        var diceHand = new DiceHand(new int[] {
+                1,2,2,4,5
+        });
+
+        assertEquals(4,diceHand.getValue(DiceChoice.TWOS) );
+    }
+    @Test
+    public void ThreesDiceTest(){
+        var diceHand = new DiceHand(new int[] {
+                3,3,3,3,3
+        });
+
+        assertEquals(15,diceHand.getValue(DiceChoice.THREES) );
+    }
+
 
 }
 
