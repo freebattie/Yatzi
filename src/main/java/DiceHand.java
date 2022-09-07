@@ -21,10 +21,10 @@ public class DiceHand {
             else
                 valueOfEachDie.put(die,valueOfEachDie.get(die) + 1);
         }
-
-        for (var key  : valueOfEachDie.keySet()){
-
+        if (diceChoice == DiceChoice.ONEPAIR ){
+            return getMaxScore(valueOfEachDie, 2);
         }
+
         if (diceChoice == DiceChoice.CHANCE){
             return 15;
 
@@ -46,5 +46,20 @@ public class DiceHand {
             return 0;
 
 
+    }
+
+    private int getMaxScore(HashMap<Integer, Integer> valueOfEachDie, int nrOfDices) {
+
+        int maxValue = -1;
+        for (var key  : valueOfEachDie.keySet()){
+
+            if (valueOfEachDie.get(key) >= nrOfDices) {
+                if (key * nrOfDices > maxValue){
+                    maxValue = key * nrOfDices;
+                }
+
+            }
+        }
+        return maxValue;
     }
 }
