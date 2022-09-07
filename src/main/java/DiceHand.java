@@ -27,6 +27,7 @@ public class DiceHand {
         }
         if (diceChoice == DiceChoice.CHANCE){
             return 15;
+
         }
         // [2,2,3,1,5]
         if (diceChoice == DiceChoice.ONES)
@@ -43,6 +44,7 @@ public class DiceHand {
             return valueOfEachDie.get(6)*  6;
         else
             return 0;
+
 
     }
 }
