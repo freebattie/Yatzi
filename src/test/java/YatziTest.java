@@ -38,14 +38,6 @@ public class YatziTest {
     }
 
 
-    @Test
-    public void ThreeDiceTest(){
-        var diceHand = new DiceHand(new int[]{
-                3,2,3,3,5,4
-        });
-
-        assertEquals(9, diceHand.getValue(DiceChoice.THREEOFAKIND) );
-    }
 
 }
 
