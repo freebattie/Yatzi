@@ -1,19 +1,55 @@
-import java.util.Arrays;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class DiceHand {
 
-    private int[] dies;
+    private HashMap<Integer, Integer> diceFrequency;
 
     public DiceHand(int[] dies) {
 
-        this.dies = dies;
+        this.diceFrequency = getFrequencyOfDices(dies);
     }
 
-    public int getValue(DiceChoice diceChoice) {
-        HashMap<Integer, Integer> valueOfEachDie = new HashMap<Integer, Integer>();
+    public int getMaxTotalForDiceChoice(DiceChoice diceChoice) {
 
+        if (diceChoice == DiceChoice.ONEPAIR ){
+            return getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        }
+        if (diceChoice == DiceChoice.THREEOFAKIND ){
+            return getMaxScoreOfGivenFrequency(diceFrequency, 3);
+        }
+        if (diceChoice == DiceChoice.FOREOFAKIND ){
+            return getMaxScoreOfGivenFrequency(diceFrequency, 4);
+        }
+
+        if (diceChoice == DiceChoice.CHANCE){
+            int maxvalue = 0;
+            for ( var set :  diceFrequency.entrySet()){
+                maxvalue += set.getKey() * set.getValue();
+            }
+            return maxvalue;
+        }
+        //Here we check for number of 1s,2s,3s etc
+        if (diceChoice == DiceChoice.ONES)
+            return diceFrequency.get(1);
+        if (diceChoice == DiceChoice.TWOS)
+            return diceFrequency.get(2)*  2;
+        if (diceChoice == DiceChoice.THREES)
+            return diceFrequency.get(3)*  3;
+        if (diceChoice == DiceChoice.FOURS)
+            return diceFrequency.get(4)*  4;
+        if (diceChoice == DiceChoice.FIVES)
+            return diceFrequency.get(5)*  5;
+        if (diceChoice == DiceChoice.SIXES)
+            return diceFrequency.get(6)*  6;
+        //Once code is done this should never happen.
+        else
+            return 0;
+
+
+    }
+
+    private HashMap<Integer, Integer> getFrequencyOfDices(int[] dies) {
+        HashMap<Integer, Integer> valueOfEachDie = new HashMap();
         for (int die : dies) {
 
             if (!valueOfEachDie.containsKey(die))
@@ -21,44 +57,17 @@ public class DiceHand {
             else
                 valueOfEachDie.put(die,valueOfEachDie.get(die) + 1);
         }
-        if (diceChoice == DiceChoice.ONEPAIR ){
-            return getMaxScore(valueOfEachDie, 2);
-        }
-        if (diceChoice == DiceChoice.THREEOFAKIND ){
-            return getMaxScore(valueOfEachDie, 3);
-        }
-
-        if (diceChoice == DiceChoice.CHANCE){
-            return 15;
-
-        }
-        // [2,2,3,1,5]
-        if (diceChoice == DiceChoice.ONES)
-            return valueOfEachDie.get(1);
-        if (diceChoice == DiceChoice.TWOS)
-            return valueOfEachDie.get(2)*  2;
-        if (diceChoice == DiceChoice.THREES)
-            return valueOfEachDie.get(3)*  3;
-        if (diceChoice == DiceChoice.FOURS)
-            return valueOfEachDie.get(4)*  4;
-        if (diceChoice == DiceChoice.FIVES)
-            return valueOfEachDie.get(5)*  5;
-        if (diceChoice == DiceChoice.SIXES)
-            return valueOfEachDie.get(6)*  6;
-        else
-            return 0;
-
-
+        return valueOfEachDie;
     }
 
-    private int getMaxScore(HashMap<Integer, Integer> valueOfEachDie, int nrOfDices) {
+    private int getMaxScoreOfGivenFrequency(HashMap<Integer, Integer> valueOfEachDie, int frequency) {
 
         int maxValue = -1;
         for (var key  : valueOfEachDie.keySet()){
 
-            if (valueOfEachDie.get(key) >= nrOfDices) {
-                if (key * nrOfDices > maxValue){
-                    maxValue = key * nrOfDices;
+            if (valueOfEachDie.get(key) >= frequency) {
+                if (key * frequency > maxValue){
+                    maxValue = key * frequency;
                 }
 
             }
