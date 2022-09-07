@@ -24,6 +24,9 @@ public class DiceHand {
         if (diceChoice == DiceChoice.ONEPAIR ){
             return getMaxScore(valueOfEachDie, 2);
         }
+        if (diceChoice == DiceChoice.THREEOFAKIND ){
+            return getMaxScore(valueOfEachDie, 3);
+        }
 
         if (diceChoice == DiceChoice.CHANCE){
             return 15;

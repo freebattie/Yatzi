@@ -11,7 +11,12 @@ public class YatziTest {
 
         assertEquals(15,diceHand.getValue(DiceChoice.CHANCE) );
     }
-
+    @Test
+    public void ThreeOfAKindTest() {
+        var diceHand = new DiceHand(new int[]{
+                2, 2, 2, 4, 4
+        });
+    }
     @Test
     public void OnesDiceTest(){
         var diceHand = new DiceHand(new int[] {
@@ -37,15 +42,6 @@ public class YatziTest {
         assertEquals(15,diceHand.getValue(DiceChoice.THREES) );
     }
     @Test
-    public void twoOfACind(){
-        var diceHand = new DiceHand(new int[] {
-                2,2,3,3,4
-        });
-
-        assertEquals(15,diceHand.getValue(DiceChoice.THREES) );
-    }
-
-    @Test
     public void bestPairScoreTest(){
         var diceHand = new DiceHand(new int[] {
                 2,2,3,3,4
@@ -53,8 +49,15 @@ public class YatziTest {
 
         assertEquals(6,diceHand.getValue(DiceChoice.ONEPAIR) );
     }
+    @Test
+    public void bestThreeOfAKindScoreTest(){
+        var diceHand = new DiceHand(new int[] {
+                2,2,3,3,3
+        });
 
 
+        assertEquals(9,diceHand.getValue(DiceChoice.THREEOFAKIND) );
+    }
 
 }
 
