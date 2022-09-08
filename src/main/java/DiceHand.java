@@ -11,46 +11,6 @@ public class DiceHand {
 
     public int getMaxTotalForDiceChoice(DiceChoice diceChoice) {
 
-        if (diceChoice == DiceChoice.ONEPAIR ){
-            return getMaxScoreOfGivenFrequency(diceFrequency, 2);
-        }
-        if (diceChoice == DiceChoice.THREEOFAKIND ){
-            return getMaxScoreOfGivenFrequency(diceFrequency, 3);
-        }
-        if (diceChoice == DiceChoice.FOREOFAKIND ){
-            return getMaxScoreOfGivenFrequency(diceFrequency, 4);
-        }
-        if (diceChoice == DiceChoice.YATZY ){
-            return getYatzyScore(diceFrequency, 5);
-        }
-        if (diceChoice == DiceChoice.TWOPAIR ){
-
-            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
-            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
-
-            if (maxValue2  < 0 || maxValue <0)
-                return 0;
-            return maxValue + maxValue2;
-
-        }
-        if (diceChoice == DiceChoice.HOUSE ){
-
-            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
-            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
-
-            if (maxValue2  < 0 || maxValue <0)
-                return 0;
-            return maxValue + maxValue2;
-
-        }
-
-        if (diceChoice == DiceChoice.CHANCE){
-            int maxvalue = 0;
-            for ( var set :  diceFrequency.entrySet()){
-                maxvalue += set.getKey() * set.getValue();
-            }
-            return maxvalue;
-        }
         //Here we check for number of 1s,2s,3s etc
         if (diceChoice == DiceChoice.ONES)
             return diceFrequency.get(1);
@@ -64,6 +24,53 @@ public class DiceHand {
             return diceFrequency.get(5)*  5;
         if (diceChoice == DiceChoice.SIXES)
             return diceFrequency.get(6)*  6;
+
+        if (diceChoice == DiceChoice.ONEPAIR ){
+            return getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        }
+        if (diceChoice == DiceChoice.TWOPAIR ){
+
+            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
+            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+
+            if (maxValue2  < 0 || maxValue <0)
+                return 0;
+            return maxValue + maxValue2;
+
+        }
+        if (diceChoice == DiceChoice.THREEOFAKIND ){
+            return getMaxScoreOfGivenFrequency(diceFrequency, 3);
+        }
+        if (diceChoice == DiceChoice.HOUSE ){
+
+            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
+            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+
+            if (maxValue2  < 0 || maxValue <0)
+                return 0;
+            return maxValue + maxValue2;
+
+        }
+        if (diceChoice == DiceChoice.STRAIGHTSMALL){
+            return getStraightLowScore(diceFrequency, new int []{1,2,3,4,5});
+        }
+        if (diceChoice == DiceChoice.STRAIGHTBIG){
+            return getStraightLowScore(diceFrequency, new int []{2,3,4,5,6});
+        }
+        if (diceChoice == DiceChoice.FOREOFAKIND ){
+            return getMaxScoreOfGivenFrequency(diceFrequency, 4);
+        }
+        if (diceChoice == DiceChoice.CHANCE){
+            int maxvalue = 0;
+            for ( var set :  diceFrequency.entrySet()){
+                maxvalue += set.getKey() * set.getValue();
+            }
+            return maxvalue;
+        }
+        if (diceChoice == DiceChoice.YATZY ){
+            return getYatzyScore(diceFrequency, 5);
+        }
+
         //Once code is done this should never happen.
         else
             return 0;
@@ -102,8 +109,6 @@ public class DiceHand {
     }
     private int getYatzyScore(HashMap<Integer, Integer> diceFrequency, int frequency) {
 
-        int maxValue = -1;
-
         for (var key  : diceFrequency.keySet()){
 
             if (diceFrequency.get(key) >= frequency) {
@@ -114,5 +119,17 @@ public class DiceHand {
         }
 
         return 0;
+    }
+    private int getStraightLowScore(HashMap<Integer, Integer> diceFrequency, int [] straight) {
+        int totalPoints = 0;
+        for (var val :straight ){
+            if (!diceFrequency.containsKey(val))
+                return 0;
+            else
+                totalPoints +=  val;
+        }
+
+
+        return totalPoints;
     }
 }
