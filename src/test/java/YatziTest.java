@@ -91,6 +91,15 @@ public class YatziTest {
         assertEquals(9,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
     }
     @Test
+    public void bestThreeOfAKindScoreFailTest(){
+        var diceHand = new DiceHand(new int[] {
+                2,2,1,3,3
+        });
+
+
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+    }
+    @Test
     public void bestTwoPairs(){
         var diceHand = new DiceHand(new int[] {
                 2,2,5,4,4
