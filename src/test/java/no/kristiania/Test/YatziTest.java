@@ -45,6 +45,12 @@ public class YatziTest {
         assertEquals(2,diceHand.getMaxTotalForDiceChoice(Type.ONES) );
     }
     @Test
+    public void testStaticClass(){
+
+
+        assertEquals(2, Type.TWOS);
+    }
+    @Test
     public void TwoDiceTest(){
         var diceHand = new DiceHand(new int[] {
                 1,2,2,4,5
