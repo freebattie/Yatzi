@@ -1,7 +1,8 @@
 package no.kristiania.Test;
 
-import no.kristiania.Yatzy.DiceChoice;
+
 import no.kristiania.Yatzy.DiceHand;
+import no.kristiania.Yatzy.Type;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,28 +13,28 @@ public class YatziTest {
                 1,2,3,4,5
         });
 
-        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.CHANCE) );
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(Type.CHANCE) );
     }
     @Test
     public void ThreeOfAKindTest() {
         var diceHand = new DiceHand(new int[]{
                 2, 2, 2, 4, 4
         });
-        assertEquals(6,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+        assertEquals(6,diceHand.getMaxTotalForDiceChoice(Type.THREEOFAKIND) );
     }
     @Test
     public void ThreeOfAKindFailTest() {
         var diceHand = new DiceHand(new int[]{
                 2, 2, 0, 4, 4
         });
-        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.THREEOFAKIND) );
     }
     @Test
     public void FourOfAKindTest() {
         var diceHand = new DiceHand(new int[]{
                 2, 2, 2, 2, 4
         });
-        assertEquals(8,diceHand.getMaxTotalForDiceChoice(DiceChoice.FOREOFAKIND) );
+        assertEquals(8,diceHand.getMaxTotalForDiceChoice(Type.FOUROFAKIND) );
     }
     @Test
     public void OnesDiceTest(){
@@ -41,7 +42,7 @@ public class YatziTest {
                 1,1,2,4,5
         });
 
-        assertEquals(2,diceHand.getMaxTotalForDiceChoice(DiceChoice.ONES) );
+        assertEquals(2,diceHand.getMaxTotalForDiceChoice(Type.ONES) );
     }
     @Test
     public void TwoDiceTest(){
@@ -49,7 +50,7 @@ public class YatziTest {
                 1,2,2,4,5
         });
 
-        assertEquals(4,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOS) );
+        assertEquals(4,diceHand.getMaxTotalForDiceChoice(Type.TWOS) );
     }
     @Test
     public void ThreesDiceTest(){
@@ -57,7 +58,7 @@ public class YatziTest {
                 3,3,3,3,3
         });
 
-        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREES) );
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(Type.THREES) );
     }
     @Test
     public void FoursDiceTest(){
@@ -65,7 +66,7 @@ public class YatziTest {
                 4,3,3,4,4
         });
 
-        assertEquals(12,diceHand.getMaxTotalForDiceChoice(DiceChoice.FOURS) );
+        assertEquals(12,diceHand.getMaxTotalForDiceChoice(Type.FOURS) );
     }
     @Test
     public void FivesDiceTest(){
@@ -73,7 +74,7 @@ public class YatziTest {
                 4,3,5,5,5
         });
 
-        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.FIVES) );
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(Type.FIVES) );
     }
     @Test
     public void SixesDiceTest(){
@@ -81,7 +82,7 @@ public class YatziTest {
                 4,6,6,4,3
         });
 
-        assertEquals(12,diceHand.getMaxTotalForDiceChoice(DiceChoice.SIXES) );
+        assertEquals(12,diceHand.getMaxTotalForDiceChoice(Type.SIXES) );
     }
     @Test
     public void bestPairScoreTest(){
@@ -89,7 +90,7 @@ public class YatziTest {
                 2,2,3,3,4
         });
 
-        assertEquals(6,diceHand.getMaxTotalForDiceChoice(DiceChoice.ONEPAIR) );
+        assertEquals(6,diceHand.getMaxTotalForDiceChoice(Type.ONEPAIR) );
     }
     @Test
     public void bestThreeOfAKindScoreTest(){
@@ -98,7 +99,7 @@ public class YatziTest {
         });
 
 
-        assertEquals(9,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+        assertEquals(9,diceHand.getMaxTotalForDiceChoice(Type.THREEOFAKIND) );
     }
     @Test
     public void bestThreeOfAKindScoreFailTest(){
@@ -107,7 +108,7 @@ public class YatziTest {
         });
 
 
-        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.THREEOFAKIND) );
     }
     @Test
     public void bestTwoPairs(){
@@ -116,7 +117,7 @@ public class YatziTest {
         });
 
 
-        assertEquals(12,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOPAIR) );
+        assertEquals(12,diceHand.getMaxTotalForDiceChoice(Type.TWOPAIR) );
     }
     @Test
     public void bestTwoPairsFail(){
@@ -125,49 +126,49 @@ public class YatziTest {
         });
 
 
-        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOPAIR) );
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.TWOPAIR) );
     }
     @Test
     public void checkForHouse(){
         var diceHand = new DiceHand(new int[] {
                 2,2,4,4,4
         });
-        assertEquals(16,diceHand.getMaxTotalForDiceChoice(DiceChoice.HOUSE) );
+        assertEquals(16,diceHand.getMaxTotalForDiceChoice(Type.FULLHOUSE) );
     }
     @Test
     public void checkForHouseFail(){
         var diceHand = new DiceHand(new int[] {
                 2,2,3,4,4
         });
-        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.HOUSE) );
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.FULLHOUSE) );
     }
     @Test
     public void checkForYatzy(){
         var diceHand = new DiceHand(new int[] {
                 5,5,5,5,5
         });
-        assertEquals(50,diceHand.getMaxTotalForDiceChoice(DiceChoice.YATZY) );
+        assertEquals(50,diceHand.getMaxTotalForDiceChoice(Type.YATZY) );
     }
     @Test
     public void checkForLowStright(){
         var diceHand = new DiceHand(new int[] {
                 1,2,3,4,5
         });
-        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTSMALL) );
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(Type.STRIGHTLOW) );
     }
     @Test
     public void checkForLowStrightFail(){
         var diceHand = new DiceHand(new int[] {
                 1,2,3,1,5
         });
-        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTSMALL) );
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.STRIGHTLOW) );
     }
     @Test
     public void checkForHighStright(){
         var diceHand = new DiceHand(new int[] {
                 2,3,4,5,6
         });
-        assertEquals(20,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTBIG) );
+        assertEquals(20,diceHand.getMaxTotalForDiceChoice(Type.STRIGHTHIGH) );
     }
 
 }

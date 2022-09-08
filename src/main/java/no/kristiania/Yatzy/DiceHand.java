@@ -7,63 +7,26 @@ public class DiceHand {
     private HashMap<Integer, Integer> diceFrequency;
 
     public DiceHand(int[] dies) {
-
         this.diceFrequency = getFrequencyOfDices(dies);
     }
 
-    public int getMaxTotalForDiceChoice(DiceChoice diceChoice) {
+    public int getMaxTotalForDiceChoice(int diceChoice) {
 
-        int score = 0;
-
-        //Here we check for number of 1s,2s,3s etc
-        switch (diceChoice) {
-            case ONES:
-                score = getDiceChoiceFrequency(1);
-                break;
-            case TWOS:
-                score = getDiceChoiceFrequency(2);
-                break;
-            case THREES:
-                score = getDiceChoiceFrequency(3);
-                break;
-            case FOURS:
-                score = getDiceChoiceFrequency(4);
-                break;
-            case FIVES:
-                score = getDiceChoiceFrequency(5);
-                break;
-            case SIXES:
-                score = getDiceChoiceFrequency(6);
-                break;
-            case ONEPAIR:
-                score = getMaxScoreOfGivenFrequency(diceFrequency, 2);
-                break;
-            case TWOPAIR:
-                score = getBestTwoPairScore();
-                break;
-            case THREEOFAKIND:
-                score = getMaxScoreOfGivenFrequency(diceFrequency, 3);
-                break;
-            case HOUSE:
-                score = getFullHouseScore();
-                break;
-            case STRAIGHTSMALL:
-                score = getStraightLowScore(diceFrequency, new int[]{1, 2, 3, 4, 5});
-                break;
-            case STRAIGHTBIG:
-                score = getStraightLowScore(diceFrequency, new int[]{2, 3, 4, 5, 6});
-                break;
-            case FOREOFAKIND:
-                score = getMaxScoreOfGivenFrequency(diceFrequency, 4);
-                break;
-            case CHANCE:
-                score = getChanceTotalScore();
-                break;
-            case YATZY:
-                score = getYatzyScore(diceFrequency, 5);
-                break;
-
-        }
+        int score = switch (diceChoice) {
+            case Type.ONES, Type.FOURS, Type.TWOS,
+                            Type.THREES, Type.FIVES,
+                            Type.SIXES -> getDiceChoiceFrequency(diceChoice);
+            case Type.ONEPAIR -> getMaxScoreOfGivenFrequency(diceFrequency, 2);
+            case Type.TWOPAIR -> getBestTwoPairScore();
+            case Type.THREEOFAKIND -> getMaxScoreOfGivenFrequency(diceFrequency, 3);
+            case Type.FULLHOUSE -> getFullHouseScore();
+            case Type.STRIGHTLOW -> getStraightScore(diceFrequency, new int[]{1, 2, 3, 4, 5});
+            case Type.STRIGHTHIGH -> getStraightScore(diceFrequency, new int[]{2, 3, 4, 5, 6});
+            case Type.FOUROFAKIND -> getMaxScoreOfGivenFrequency(diceFrequency, 4);
+            case Type.CHANCE -> getChanceTotalScore();
+            case Type.YATZY -> getYatzyScore(diceFrequency, 5);
+            default -> 0;
+        };
 
         return score;
 
@@ -154,7 +117,7 @@ public class DiceHand {
 
         return 0;
     }
-    private int getStraightLowScore(HashMap<Integer, Integer> diceFrequency, int [] straight) {
+    private int getStraightScore(HashMap<Integer, Integer> diceFrequency, int [] straight) {
         int totalPoints = 0;
         for (var val :straight ){
             if (!diceFrequency.containsKey(val))
