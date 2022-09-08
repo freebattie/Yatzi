@@ -11,71 +11,99 @@ public class DiceHand {
 
     public int getMaxTotalForDiceChoice(DiceChoice diceChoice) {
 
+        Integer score = 0;
+
         //Here we check for number of 1s,2s,3s etc
-        if (diceChoice == DiceChoice.ONES)
-            return diceFrequency.get(1);
-        if (diceChoice == DiceChoice.TWOS)
-            return diceFrequency.get(2)*  2;
-        if (diceChoice == DiceChoice.THREES)
-            return diceFrequency.get(3)*  3;
-        if (diceChoice == DiceChoice.FOURS)
-            return diceFrequency.get(4)*  4;
-        if (diceChoice == DiceChoice.FIVES)
-            return diceFrequency.get(5)*  5;
-        if (diceChoice == DiceChoice.SIXES)
-            return diceFrequency.get(6)*  6;
-
-        if (diceChoice == DiceChoice.ONEPAIR ){
-            return getMaxScoreOfGivenFrequency(diceFrequency, 2);
-        }
-        if (diceChoice == DiceChoice.TWOPAIR ){
-
-            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
-            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
-
-            if (maxValue2  < 0 || maxValue <0)
+        switch (diceChoice) {
+            case ONES:
+                score = diceFrequency.get(1);
+                break;
+            case TWOS:
+                score = diceFrequency.get(2) * 2;
+                break;
+            case THREES:
+                score = diceFrequency.get(3) * 3;
+                break;
+            case FOURS:
+                score = diceFrequency.get(4) * 4;
+                break;
+            case FIVES:
+                score = diceFrequency.get(5) * 5;
+                break;
+            case SIXES:
+                score = diceFrequency.get(6) * 6;
+                break;
+            case ONEPAIR:
+                score = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+                break;
+            case TWOPAIR:
+                score = getBestTwoPairScore();
+                break;
+            case THREEOFAKIND:
+                score = getMaxScoreOfGivenFrequency(diceFrequency, 3);
+                break;
+            case HOUSE:
+                score = getFullHouseScore();
+                break;
+            case STRAIGHTSMALL:
+                score = getStraightLowScore(diceFrequency, new int[]{1, 2, 3, 4, 5});
+                break;
+            case STRAIGHTBIG:
+                score = getStraightLowScore(diceFrequency, new int[]{2, 3, 4, 5, 6});
+                break;
+            case FOREOFAKIND:
+                score = getMaxScoreOfGivenFrequency(diceFrequency, 4);
+                break;
+            case CHANCE:
+                score = getChanceTotalScore();
+                break;
+            case YATZY:
+                score = getYatzyScore(diceFrequency, 5);
+                break;
+            default:
                 return 0;
-            return maxValue + maxValue2;
-
-        }
-        if (diceChoice == DiceChoice.THREEOFAKIND ){
-            return getMaxScoreOfGivenFrequency(diceFrequency, 3);
-        }
-        if (diceChoice == DiceChoice.HOUSE ){
-
-            var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
-            int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
-
-            if (maxValue2  < 0 || maxValue <0)
-                return 0;
-            return maxValue + maxValue2;
-
-        }
-        if (diceChoice == DiceChoice.STRAIGHTSMALL){
-            return getStraightLowScore(diceFrequency, new int []{1,2,3,4,5});
-        }
-        if (diceChoice == DiceChoice.STRAIGHTBIG){
-            return getStraightLowScore(diceFrequency, new int []{2,3,4,5,6});
-        }
-        if (diceChoice == DiceChoice.FOREOFAKIND ){
-            return getMaxScoreOfGivenFrequency(diceFrequency, 4);
-        }
-        if (diceChoice == DiceChoice.CHANCE){
-            int maxvalue = 0;
-            for ( var set :  diceFrequency.entrySet()){
-                maxvalue += set.getKey() * set.getValue();
-            }
-            return maxvalue;
-        }
-        if (diceChoice == DiceChoice.YATZY ){
-            return getYatzyScore(diceFrequency, 5);
         }
 
-        //Once code is done this should never happen.
-        else
+        if (score == null)
             return 0;
+        else
+            return score.intValue();
 
 
+    }
+
+    private Integer getChanceTotalScore() {
+        Integer score;
+        int maxvalue = 0;
+        for ( var set :  diceFrequency.entrySet()){
+            maxvalue += set.getKey() * set.getValue();
+        }
+        score = maxvalue;
+        return score;
+    }
+
+    private Integer getFullHouseScore() {
+        Integer score;
+        var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
+        int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+
+        if (maxValue2  < 0 || maxValue <0)
+            return null;
+        else
+            score = maxValue + maxValue2;
+        return score;
+    }
+
+    private Integer getBestTwoPairScore() {
+        Integer score;
+        var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+
+        if (maxValue2  < 0 || maxValue <0)
+            return null;
+        else
+            score = maxValue + maxValue2;
+        return score;
     }
 
     private HashMap<Integer, Integer> getFrequencyOfDices(int[] dies) {
@@ -92,7 +120,7 @@ public class DiceHand {
 
     private int getMaxScoreOfGivenFrequency(HashMap<Integer, Integer> diceFrequency, int frequency) {
 
-        int maxValue = -1;
+        int maxValue = 0;
         int maxKey = 0;
         for (var key  : diceFrequency.keySet()){
 
