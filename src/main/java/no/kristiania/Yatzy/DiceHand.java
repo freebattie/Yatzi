@@ -89,7 +89,7 @@ public class DiceHand {
         var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
         int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
 
-        if (maxValue2  < 0 || maxValue <0)
+        if (maxValue2  <= 0 || maxValue <= 0)
             return null;
         else
             score = maxValue + maxValue2;
@@ -101,7 +101,7 @@ public class DiceHand {
         var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
         int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
 
-        if (maxValue2  < 0 || maxValue <0)
+        if (maxValue2  <= 0 || maxValue <= 0)
             return null;
         else
             score = maxValue + maxValue2;

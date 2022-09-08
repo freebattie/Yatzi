@@ -119,11 +119,27 @@ public class YatziTest {
         assertEquals(12,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOPAIR) );
     }
     @Test
+    public void bestTwoPairsFail(){
+        var diceHand = new DiceHand(new int[] {
+                2,1,5,4,4
+        });
+
+
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.TWOPAIR) );
+    }
+    @Test
     public void checkForHouse(){
         var diceHand = new DiceHand(new int[] {
                 2,2,4,4,4
         });
         assertEquals(16,diceHand.getMaxTotalForDiceChoice(DiceChoice.HOUSE) );
+    }
+    @Test
+    public void checkForHouseFail(){
+        var diceHand = new DiceHand(new int[] {
+                2,2,3,4,4
+        });
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.HOUSE) );
     }
     @Test
     public void checkForYatzy(){
@@ -138,6 +154,13 @@ public class YatziTest {
                 1,2,3,4,5
         });
         assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTSMALL) );
+    }
+    @Test
+    public void checkForLowStrightFail(){
+        var diceHand = new DiceHand(new int[] {
+                1,2,3,1,5
+        });
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTSMALL) );
     }
     @Test
     public void checkForHighStright(){
