@@ -1,9 +1,11 @@
 package no.kristiania.Yatzy;
 
 public class Type {
-    public Type(){
-
+    public int cheat = 0;
+    public Type(int i){
+    cheat = i;
     }
+
     public static final int ONES = 1;
     public static final int TWOS = 2;
     public static final int THREES = 3;

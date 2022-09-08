@@ -48,9 +48,9 @@ public class YatziTest {
     }
     @Test
     public void testStaticClass(){
-    var test = new Type();
+    var test = new Type(1);
 
-        assertTrue(test instanceof Type);
+        assertEquals(1,test.cheat);
     }
     @Test
     public void TwoDiceTest(){
