@@ -6,6 +6,8 @@ import no.kristiania.Yatzy.Type;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class YatziTest {
     @Test
     public void RandomDiceTest(){
@@ -48,7 +50,7 @@ public class YatziTest {
     public void testStaticClass(){
     var test = new Type();
 
-        assert (test instanceof Type);
+        assertTrue(test instanceof Type);
     }
     @Test
     public void TwoDiceTest(){
