@@ -46,9 +46,9 @@ public class YatziTest {
     }
     @Test
     public void testStaticClass(){
+    var test = new Type();
 
-
-        assertEquals(2, Type.TWOS);
+        assert (test instanceof Type);
     }
     @Test
     public void TwoDiceTest(){
