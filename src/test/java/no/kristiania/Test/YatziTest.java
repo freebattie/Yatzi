@@ -22,6 +22,13 @@ public class YatziTest {
         assertEquals(6,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
     }
     @Test
+    public void ThreeOfAKindFailTest() {
+        var diceHand = new DiceHand(new int[]{
+                2, 2, 0, 4, 4
+        });
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(DiceChoice.THREEOFAKIND) );
+    }
+    @Test
     public void FourOfAKindTest() {
         var diceHand = new DiceHand(new int[]{
                 2, 2, 2, 2, 4
