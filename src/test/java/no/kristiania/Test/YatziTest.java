@@ -1,7 +1,10 @@
+package no.kristiania.Test;
+
+import no.kristiania.Yatzy.DiceChoice;
+import no.kristiania.Yatzy.DiceHand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class YatziTest {
     @Test
     public void RandomDiceTest(){

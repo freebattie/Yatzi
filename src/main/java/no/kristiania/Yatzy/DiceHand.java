@@ -1,3 +1,5 @@
+package no.kristiania.Yatzy;
+
 import java.util.HashMap;
 
 public class DiceHand {
