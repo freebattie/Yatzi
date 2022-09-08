@@ -30,7 +30,7 @@ jobs:
     - name: 🚀 Coveralls Coverage Report Submission
       run: mvn coveralls:report --define repoToken=${{ secrets.COVERALL_REPO_TOKEN }}
     - name: refresh coverage badge
-      uses: fjogeleit/http-request-action@master
+      uses:✨ fjogeleit/http-request-action@master
       with:
         url: https://camo.githubusercontent.com/20dc01aab3f48b1c6210edf12e43e5f889c6e060f31e54e24f225e0e73dce7cf/68747470733a2f2f636f766572616c6c732e696f2f7265706f732f6769746875622f667265656261747469652f5961747a692f62616467652e7376673f6272616e63683d6d61696e
         method: PURGE
