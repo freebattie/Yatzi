@@ -4,27 +4,27 @@ import java.util.HashMap;
 
 public class DiceHand {
 
-    private HashMap<Integer, Integer> diceFrequency;
+    private HashMap<Integer, Integer> dicesFrequency;
 
     public DiceHand(int[] dies) {
-        this.diceFrequency = getFrequencyOfDices(dies);
+        this.dicesFrequency = getFrequencyOfDices(dies);
     }
 
     public int getMaxTotalForDiceChoice(int diceChoice) {
 
         int score = switch (diceChoice) {
-            case Type.ONES, Type.FOURS, Type.TWOS,
-                            Type.THREES, Type.FIVES,
-                            Type.SIXES -> getDiceChoiceFrequency(diceChoice);
-            case Type.ONEPAIR -> getMaxScoreOfGivenFrequency(diceFrequency, 2);
+            case Type.ONES, Type.TWOS, Type.THREES,
+                 Type.FOURS, Type.FIVES,
+                 Type.SIXES -> getDiceChoiceFrequency(diceChoice);
+            case Type.ONEPAIR -> getMaxScoreOfGivenFrequency(dicesFrequency, 2);
             case Type.TWOPAIR -> getBestTwoPairScore();
-            case Type.THREEOFAKIND -> getMaxScoreOfGivenFrequency(diceFrequency, 3);
+            case Type.THREEOFAKIND -> getMaxScoreOfGivenFrequency(dicesFrequency, 3);
             case Type.FULLHOUSE -> getFullHouseScore();
-            case Type.STRIGHTLOW -> getStraightScore(diceFrequency, new int[]{1, 2, 3, 4, 5});
-            case Type.STRIGHTHIGH -> getStraightScore(diceFrequency, new int[]{2, 3, 4, 5, 6});
-            case Type.FOUROFAKIND -> getMaxScoreOfGivenFrequency(diceFrequency, 4);
+            case Type.STRIGHTLOW -> getStraightScore(dicesFrequency, new int[]{1, 2, 3, 4, 5});
+            case Type.STRIGHTHIGH -> getStraightScore(dicesFrequency, new int[]{2, 3, 4, 5, 6});
+            case Type.FOUROFAKIND -> getMaxScoreOfGivenFrequency(dicesFrequency, 4);
             case Type.CHANCE -> getChanceTotalScore();
-            case Type.YATZY -> getYatzyScore(diceFrequency, 5);
+            case Type.YATZY -> getYatzyScore(dicesFrequency, 5);
             default -> 0;
         };
 
@@ -34,15 +34,19 @@ public class DiceHand {
     }
 
     private int getDiceChoiceFrequency(int diceValue) {
-        int score = 0;
-        score = diceFrequency.get(diceValue) * diceValue;
-        return score;
+
+        Integer tmpScore = dicesFrequency.get(diceValue);
+        if (tmpScore == null)
+            tmpScore = 0;
+        else
+            tmpScore *= diceValue;
+        return tmpScore;
     }
 
     private Integer getChanceTotalScore() {
         int score  = 0;
         int maxvalue = 0;
-        for ( var set :  diceFrequency.entrySet()){
+        for ( var set :  dicesFrequency.entrySet()){
             maxvalue += set.getKey() * set.getValue();
         }
         score = maxvalue;
@@ -51,8 +55,8 @@ public class DiceHand {
 
     private Integer getFullHouseScore() {
         int score = 0;
-        var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
-        var maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        var maxValue= getMaxScoreOfGivenFrequency(dicesFrequency, 3);
+        var maxValue2 = getMaxScoreOfGivenFrequency(dicesFrequency, 2);
 
         if (maxValue <= 0 || maxValue2 <= 0)
             score = 0;
@@ -64,8 +68,8 @@ public class DiceHand {
 
     private Integer getBestTwoPairScore() {
         int score = 0;
-        var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
-        var maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        var maxValue= getMaxScoreOfGivenFrequency(dicesFrequency, 2);
+        var maxValue2 = getMaxScoreOfGivenFrequency(dicesFrequency, 2);
 
         if (maxValue <= 0 || maxValue2 <= 0)
             score = 0;

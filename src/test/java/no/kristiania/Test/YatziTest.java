@@ -47,6 +47,14 @@ public class YatziTest {
         assertEquals(2,diceHand.getMaxTotalForDiceChoice(Type.ONES) );
     }
     @Test
+    public void OnesDiceFailTest(){
+        var diceHand = new DiceHand(new int[] {
+                3,4,2,4,5
+        });
+
+        assertEquals(0a,diceHand.getMaxTotalForDiceChoice(Type.ONES) );
+    }
+    @Test
     public void testStaticClass(){
     var test = new Type(1);
 
