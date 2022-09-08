@@ -13,27 +13,27 @@ public class DiceHand {
 
     public int getMaxTotalForDiceChoice(DiceChoice diceChoice) {
 
-        Integer score = 0;
+        int score = 0;
 
         //Here we check for number of 1s,2s,3s etc
         switch (diceChoice) {
             case ONES:
-                score = diceFrequency.get(1);
+                score = getDiceChoiceFrequency(1);
                 break;
             case TWOS:
-                score = diceFrequency.get(2) * 2;
+                score = getDiceChoiceFrequency(2);
                 break;
             case THREES:
-                score = diceFrequency.get(3) * 3;
+                score = getDiceChoiceFrequency(3);
                 break;
             case FOURS:
-                score = diceFrequency.get(4) * 4;
+                score = getDiceChoiceFrequency(4);
                 break;
             case FIVES:
-                score = diceFrequency.get(5) * 5;
+                score = getDiceChoiceFrequency(5);
                 break;
             case SIXES:
-                score = diceFrequency.get(6) * 6;
+                score = getDiceChoiceFrequency(6);
                 break;
             case ONEPAIR:
                 score = getMaxScoreOfGivenFrequency(diceFrequency, 2);
@@ -62,20 +62,22 @@ public class DiceHand {
             case YATZY:
                 score = getYatzyScore(diceFrequency, 5);
                 break;
-            default:
-                return 0;
+
         }
 
-        if (score == null)
-            return 0;
-        else
-            return score.intValue();
+        return score;
 
 
     }
 
+    private int getDiceChoiceFrequency(int diceValue) {
+        int score;
+        score = diceFrequency.get(diceValue) * diceValue;
+        return score;
+    }
+
     private Integer getChanceTotalScore() {
-        Integer score;
+        int score  = 0;
         int maxvalue = 0;
         for ( var set :  diceFrequency.entrySet()){
             maxvalue += set.getKey() * set.getValue();
@@ -85,26 +87,28 @@ public class DiceHand {
     }
 
     private Integer getFullHouseScore() {
-        Integer score;
+        int score = 0;
         var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 3);
-        int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        var maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
 
-        if (maxValue2  <= 0 || maxValue <= 0)
-            return null;
+        if (maxValue <= 0 || maxValue2 <= 0)
+            score = 0;
         else
             score = maxValue + maxValue2;
+
         return score;
     }
 
     private Integer getBestTwoPairScore() {
-        Integer score;
+        int score = 0;
         var maxValue= getMaxScoreOfGivenFrequency(diceFrequency, 2);
-        int maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
+        var maxValue2 = getMaxScoreOfGivenFrequency(diceFrequency, 2);
 
-        if (maxValue2  <= 0 || maxValue <= 0)
-            return null;
+        if (maxValue <= 0 || maxValue2 <= 0)
+            score = 0;
         else
             score = maxValue + maxValue2;
+
         return score;
     }
 
