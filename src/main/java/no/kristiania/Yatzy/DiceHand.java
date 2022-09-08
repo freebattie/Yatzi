@@ -34,7 +34,7 @@ public class DiceHand {
     }
 
     private int getDiceChoiceFrequency(int diceValue) {
-        int score;
+        int score = 0;
         score = diceFrequency.get(diceValue) * diceValue;
         return score;
     }
