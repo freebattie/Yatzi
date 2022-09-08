@@ -113,6 +113,20 @@ public class YatziTest {
         });
         assertEquals(50,diceHand.getMaxTotalForDiceChoice(DiceChoice.YATZY) );
     }
+    @Test
+    public void checkForLowStright(){
+        var diceHand = new DiceHand(new int[] {
+                1,2,3,4,5
+        });
+        assertEquals(15,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTSMALL) );
+    }
+    @Test
+    public void checkForHighStright(){
+        var diceHand = new DiceHand(new int[] {
+                2,3,4,5,6
+        });
+        assertEquals(20,diceHand.getMaxTotalForDiceChoice(DiceChoice.STRAIGHTBIG) );
+    }
 
 }
 
