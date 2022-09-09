@@ -52,7 +52,13 @@ public class YatziTest {
                 3,4,2,4,5
         });
 
-        assertEquals(0a,diceHand.getMaxTotalForDiceChoice(Type.ONES) );
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.ONES) );
+    }
+    @Test
+    public void FailTest(){
+        var diceHand = new DiceHand(new int[] {});
+
+        assertEquals(0,diceHand.getMaxTotalForDiceChoice(Type.YATZY) );
     }
     @Test
     public void testStaticClass(){

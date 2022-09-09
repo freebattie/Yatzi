@@ -27,34 +27,26 @@ public class DiceHand {
             case Type.YATZY -> getYatzyScore(dicesFrequency, 5);
             default -> 0;
         };
-
         return score;
-
-
     }
 
     private int getDiceChoiceFrequency(int diceValue) {
-
-        Integer tmpScore = dicesFrequency.get(diceValue);
-        if (tmpScore == null)
-            tmpScore = 0;
+        if (dicesFrequency.containsKey(diceValue))
+            return  dicesFrequency.get(diceValue) *diceValue;
         else
-            tmpScore *= diceValue;
-        return tmpScore;
+            return 0;
     }
 
     private Integer getChanceTotalScore() {
-        int score  = 0;
         int maxvalue = 0;
-        for ( var set :  dicesFrequency.entrySet()){
+        for ( var set :  dicesFrequency.entrySet())
             maxvalue += set.getKey() * set.getValue();
-        }
-        score = maxvalue;
-        return score;
+
+        return maxvalue;
     }
 
     private Integer getFullHouseScore() {
-        int score = 0;
+        int score;
         var maxValue= getMaxScoreOfGivenFrequency(dicesFrequency, 3);
         var maxValue2 = getMaxScoreOfGivenFrequency(dicesFrequency, 2);
 
@@ -88,6 +80,7 @@ public class DiceHand {
             else
                 valueOfEachDie.put(die,valueOfEachDie.get(die) + 1);
         }
+
         return valueOfEachDie;
     }
 
@@ -105,6 +98,7 @@ public class DiceHand {
 
             }
         }
+
         diceFrequency.remove(maxKey);
         return maxValue;
     }
@@ -123,13 +117,13 @@ public class DiceHand {
     }
     private int getStraightScore(HashMap<Integer, Integer> diceFrequency, int [] straight) {
         int totalPoints = 0;
+
         for (var val :straight ){
             if (!diceFrequency.containsKey(val))
                 return 0;
             else
                 totalPoints +=  val;
         }
-
 
         return totalPoints;
     }
