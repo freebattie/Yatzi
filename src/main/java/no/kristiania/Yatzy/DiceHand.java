@@ -14,7 +14,7 @@ public class DiceHand {
         int[] LOWSTRAIGHT =  new int[]{1, 2, 3, 4, 5};
         int[] HIGHSTRAIGHT =  new int[]{2, 3, 4, 5, 6};
 
-        int score = switch (diceChoice) {
+        return switch (diceChoice) {
             case Type.ONES, Type.TWOS, Type.THREES,
                  Type.FOURS, Type.FIVES,
                  Type.SIXES -> getDiceChoiceFrequency(diceChoice);
@@ -29,7 +29,7 @@ public class DiceHand {
             case Type.YATZY -> getYatzyScore(dicesFrequency, 5);
             default -> 0;
         };
-        return score;
+
     }
     private HashMap<Integer, Integer> getFrequencyOfDices(int[] dies) {
 
