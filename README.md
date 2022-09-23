@@ -5,3 +5,4 @@
 [![Issues](https://img.shields.io/github/issues-raw/freebattie/Yatzi.svg?maxAge=1&kill_cache=1)](https://github.com/freebattie/Yatzi/issues)  
 
 
+TEST
